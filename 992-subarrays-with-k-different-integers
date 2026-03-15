@@ -1,0 +1,23 @@
+class Solution {
+    public int atmost(int[] nums, int k) {
+        int l=0;
+        int count=0;
+        Map<Integer,Integer>dict=new HashMap<>();
+        for(int r=0;r<nums.length;r++){
+            dict.put(nums[r],
+            dict.getOrDefault(nums[r],0)+1);
+            while (dict.size()>k){
+                dict.put(nums[l],dict.getOrDefault(nums[l],0)-1);
+                if(dict.get(nums[l])==0){
+                    dict.remove(nums[l]);
+                }
+                l+=1;
+            }
+            count+=r-l+1;
+            }
+        return count;
+    }
+    public int subarraysWithKDistinct(int[] nums, int k) {
+        return atmost(nums,k)-atmost(nums,k-1);
+    }
+}
