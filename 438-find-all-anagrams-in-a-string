@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int l=0;
+        List<Integer>res=new ArrayList<>();
+        Map<Character,Integer>dict1=new HashMap<>();
+        Map<Character,Integer>dict2=new HashMap<>();
+        for(int i=0;i<p.length();i++){
+            dict1.put(p.charAt(i),dict1.getOrDefault(p.charAt(i),0)+1);
+        }
+        for(int r=0;r<s.length();r++){
+            dict2.put(s.charAt(r),dict2.getOrDefault(s.charAt(r),0)+1);
+            if (r-l+1==p.length()){
+                if (dict1.equals(dict2)){
+                    res.add(l);}
+                dict2.put(s.charAt(l),dict2.getOrDefault(s.charAt(l),0)-1);
+                if(dict2.getOrDefault(s.charAt(l),0)==0){
+                    dict2.remove(s.charAt(l));}
+                l+=1;}
+        }
+        return res;
+
+
+    }
+}
