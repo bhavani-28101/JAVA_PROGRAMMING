@@ -1,0 +1,22 @@
+//using set
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        int l=0;
+        int total=0;
+        int res=0;
+        Set<Integer> s=new HashSet<>();
+        for(int r=0;r<nums.length;r++){
+            while(s.contains(nums[r])){
+                s.remove(nums[l]);
+                total-=nums[l];
+                l+=1;
+            }
+            s.add(nums[r]);
+            total+=nums[r];
+            res=Math.max(res,total);
+        }
+        return res;
+    }
+}
+//we can also solve the above using dictionaries but time complexity would be high ...
+//try using unique (unique is simply a ferquency array)-if it is used the element need not to be popped, hence tc will be reduced.....
