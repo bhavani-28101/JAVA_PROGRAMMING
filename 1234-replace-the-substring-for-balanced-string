@@ -1,0 +1,26 @@
+class Solution {
+    public int balancedString(String s) {
+        Map<Character,Integer>dict=new HashMap<>();
+        dict.put('Q',0);
+        dict.put('R',0);
+        dict.put('E',0);
+        dict.put('W',0);
+        for(int i=0 ;i<s.length();i++){
+            dict.put(s.charAt(i),dict.getOrDefault(s.charAt(i),0)+1);
+            }
+        int n=s.length();
+        int res=n;
+        int l=0;
+        if((dict.get('Q')<=n/4) && (dict.get('R')<=n/4) && (dict.get('E')<=n/4) && (dict.get('W')<=n/4)){
+            return 0;
+        }
+        for(int r=0;r<n;r++){
+            dict.put(s.charAt(r),dict.get(s.charAt(r))-1);
+            while (l<=r && (dict.get('Q')<=n/4) && (dict.get('R')<=n/4) && (dict.get('E')<=n/4) && (dict.get('W')<=n/4)){
+                res=Math.min(res,r-l+1);
+                dict.put(s.charAt(l),dict.get(s.charAt(l))+1);
+            }
+        }
+        return res;
+    }
+}
