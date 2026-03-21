@@ -1,0 +1,22 @@
+class Solution {
+    public int totalFruit(int[] fruits) {
+        Map<Integer,Integer>dict=new HashMap<>();
+        int l=0;
+        int res=0;
+        int total=0;
+        for(int r=0;r<fruits.length;r++){
+            dict.put(fruits[r],dict.getOrDefault(fruits[r],0)+1);
+            total+=1;
+            while(dict.size()>2){
+                dict.put(fruits[l],dict.getOrDefault(fruits[l],0)-1);
+                total-=1;
+                if(dict.get(fruits[l])==0){
+                    dict.remove(fruits[l]);
+                }
+                l+=1;
+            }
+            res=Math.max(res,total);
+        }
+        return res;
+    }
+}
