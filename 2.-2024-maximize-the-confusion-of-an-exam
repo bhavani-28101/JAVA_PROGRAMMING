@@ -1,0 +1,19 @@
+class Solution {
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        int res=0;
+        int l=0;
+        int maxcount=0;
+        Map<Character,Integer>dict=new HashMap<>();
+        for(int r=0;r<answerKey.length();r++){
+            dict.put(answerKey.charAt(r),dict.getOrDefault(answerKey.charAt(r),0)+1);
+            maxcount=Math.max(dict.get(answerKey.charAt(r)),maxcount);
+            while((r-l+1-maxcount)>k){
+                dict.put(answerKey.charAt(l),dict.getOrDefault(answerKey.charAt(l),0)-1);
+                l+=1;
+            }
+            res=Math.max(res,r-l+1);
+        }
+        return res;
+
+    }
+}
