@@ -1,0 +1,37 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        Map<Character,Integer>dict1=new HashMap<>();
+        Map<Character,Integer>dict2=new HashMap<>();
+        int have=0;
+        int need=0;
+        int l=0;
+        int res=Integer.MAX_VALUE;
+        String resstring="";
+        if(t.length()==0){
+            return "";
+        }
+        for(int i=0;i<t.length();i++){
+            dict1.put(t.charAt(i),dict1.getOrDefault(t.charAt(i),0)+1);}
+        need=dict1.size();
+        for(int r=0;r<s.length();r++){
+            dict2.put(s.charAt(r),dict2.getOrDefault(s.charAt(r),0)+1);
+            if(dict1.containsKey(s.charAt(r)) && dict2.get(s.charAt(r)).intValue()==dict1.get(s.charAt(r)).intValue())
+                have+=1;
+            while(have==need && l<=r){
+                if(r-l+1<res){
+                    res=r-l+1;
+                    resstring=s.substring(l,r+1);
+                }
+                dict2.put(s.charAt(l),dict2.get(s.charAt(l))-1);
+                if(dict1.containsKey(s.charAt(l)) && (dict2.get(s.charAt(l))<dict1.get(s.charAt(l)))){
+                    have-=1;
+                }
+                if(l<=r && dict2.get(s.charAt(l))==0){
+                    dict2.remove(s.charAt(l));
+                }
+                l++;
+            }
+        }
+        return resstring;
+    }
+}
