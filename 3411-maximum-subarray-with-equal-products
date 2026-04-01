@@ -1,0 +1,42 @@
+class Solution {
+    public int maxLength(int[] nums) {
+        int n = nums.length;
+        int maxLen = 0;
+
+        for (int l = 0; l < n; l++) {
+            long gcdVal = 0;
+            long lcmVal = 1;
+
+            for (int r = l; r < n; r++) {
+                gcdVal = gcd(gcdVal, nums[r]);
+                lcmVal = lcm(lcmVal, nums[r]);
+
+                // Overflow protection
+                if (lcmVal > 1e9) break;
+
+                // Check condition
+                if (lcmVal * gcdVal == product(nums, l, r)) {
+                    maxLen = Math.max(maxLen, r - l + 1);
+                }
+            }
+        }
+        return maxLen;
+    }
+
+    private long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    private long lcm(long a, long b) {
+        return (a * b) / gcd(a, b);
+    }
+
+    private long product(int[] nums, int l, int r) {
+        long prod = 1;
+        for (int i = l; i <= r; i++) {
+            prod *= nums[i];
+            if (prod > 1e9) return prod;
+        }
+        return prod;
+    }
+}
