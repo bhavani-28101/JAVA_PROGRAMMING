@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        HashSet<String>res=new HashSet<>();
+        HashSet<String>mainres=new HashSet<>();
+        int l=0;
+        String sub="";
+        for(int r=0;r<s.length();r++){
+            while((r-l+1)>10){
+                l+=1;
+            }
+            if((r-l+1)==10){
+                sub=s.substring(l,r+1);
+                if(res.contains(sub)){
+                    mainres.add(sub);
+                }
+                else{
+                    res.add(sub);
+                }
+            }
+        }
+        return new ArrayList<>(mainres);
+    }
+}
