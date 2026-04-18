@@ -1,0 +1,12 @@
+class Solution {
+    public boolean findSubarrays(int[] nums) {
+        HashSet<Integer>seen=new HashSet<>();
+        int sumarr=0;
+        for(int r=0;r<nums.length-1;r++){
+            sumarr=nums[r]+nums[r+1];
+            if(seen.contains(sumarr))
+                return true;
+            seen.add(sumarr);
+        }
+        return false;
+    }
