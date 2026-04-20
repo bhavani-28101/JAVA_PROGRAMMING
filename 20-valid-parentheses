@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isValid(String s) {
+        HashMap<Character,Character>dict=new HashMap<>();
+        dict.put(')','(');
+        dict.put(']','[');
+        dict.put('}','{');
+        ArrayList<Character> stack=new ArrayList<>();
+        for(int r=0;r<s.length();r++){
+            if(s.charAt(r)=='(' || s.charAt(r)=='[' || s.charAt(r)=='{'){
+                stack.add(s.charAt(r));
+            }
+            else{
+                if(!stack.isEmpty() && stack.get(stack.size()-1)==dict.get(s.charAt(r))){
+                    stack.remove(stack.size()-1);
+                }
+                else{
+                    return false;
+                }
+            }
+        }return (stack.isEmpty());
+    }
+}
