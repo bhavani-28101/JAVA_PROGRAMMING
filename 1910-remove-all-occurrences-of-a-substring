@@ -1,0 +1,18 @@
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            sb.append(c);
+
+            // Check if the end matches 'part'
+            if (sb.length() >= part.length() &&
+                sb.substring(sb.length() - part.length()).equals(part)) {
+                
+                sb.delete(sb.length() - part.length(), sb.length());
+            }
+        }
+
+        return sb.toString();
+    }
+}
