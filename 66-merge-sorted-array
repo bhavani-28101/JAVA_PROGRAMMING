@@ -1,0 +1,10 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i=0;
+        for(int r=m;r<nums1.length;r++){
+            nums1[r]=nums2[i];
+            i+=1;
+        }
+        Arrays.sort(nums1);
+    }
+}
