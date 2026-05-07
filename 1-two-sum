@@ -1,0 +1,16 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> dict=new HashMap<>();
+        ArrayList<Integer>res=new ArrayList<>();
+        int diff=0;
+        for(int r=0;r<nums.length;r++){
+            diff=target-nums[r];
+            if(dict.containsKey(diff)){
+                res.add(dict.get(diff));
+                res.add(r);
+                break;
+            }
+            dict.put(nums[r],r);
+        }return new int[]{res.get(0),res.get(1)};
+    }
+}
