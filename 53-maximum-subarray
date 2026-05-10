@@ -1,0 +1,16 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int res=Arrays.stream(nums).max().getAsInt();
+        int currsum=0;
+        for(int r=0;r<nums.length;r++){
+            currsum+=nums[r];
+            if(currsum>res){
+                res=currsum;
+            }
+            else if(currsum<0){
+                currsum=0;
+            }
+        }
+        return res;
+    }
+}
