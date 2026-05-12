@@ -1,0 +1,12 @@
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int r=0;r<nums.length;r++){
+            if(dict.containsKey(nums[r])){
+                return true;
+            }
+            dict.put(nums[r],1);
+        }
+        return false;
+    }
+}
