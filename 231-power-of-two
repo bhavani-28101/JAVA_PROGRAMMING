@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        int temp=n;
+        if(n==1){
+            return true;
+        }
+        if(n<=0){
+            return false;
+        }
+        while(temp>1){
+            if(isodd(temp)){
+                return false;
+            }
+            temp=(temp/2);
+            }
+        return true;
+    }
+    public boolean isodd(int temp){
+        if(temp%2!=0){
+            return true;
+        }
+        return false;
+    }
+    }
