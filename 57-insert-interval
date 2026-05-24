@@ -1,0 +1,43 @@
+class Solution {
+    public int[][] insert(int[][] nums1, int[] nums2) {
+        List<int []> arr=new ArrayList<>();
+        List<int []> res=new ArrayList<>();
+        for(int[] i:nums1){
+            arr.add(i);
+        }
+        if(nums1.length==0){
+            return new int[][]{nums2};
+        }
+        if(nums2.length==0){
+            return nums1;
+        }
+        int mid=binarysearch(nums1,nums2,0,nums1.length-1);
+        arr.add(mid,nums2);
+        int [] temp2=arr.get(0);
+        for(int i=0;i<arr.size();i++){
+            if(temp2[1] >= arr.get(i)[0]){
+                temp2[1]=Math.max(temp2[1],arr.get(i)[1]);
+            }
+            else{
+                res.add(temp2);
+                temp2=arr.get(i);
+            }
+        }
+        res.add(temp2);
+        return res.toArray(new int[res.size()][]);
+    }
+    public int binarysearch(int[][] nums1,int[] nums2,int l,int h){
+        if(l>h){
+            return l;
+        }
+        int mid=l+(h-l)/2;
+        int temp1=nums2[0];
+        int temp2=nums2[1];
+        if(nums1[mid][0]>temp1){
+            return binarysearch(nums1,nums2,l,mid-1);}
+        else if(nums1[mid][0]<temp1){
+            return binarysearch(nums1,nums2,mid+1,h);}
+        else{
+            return mid;}
+    }
+}
