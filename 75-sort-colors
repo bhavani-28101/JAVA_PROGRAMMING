@@ -1,0 +1,29 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        if(nums.length<=1){
+            return;
+        }
+        Map<Integer,Integer> dict=new HashMap<>();
+        for(int i:nums){
+            dict.put(i,dict.getOrDefault(i,0)+1);
+        }
+        int k=0;
+        while(k<nums.length){
+            if(dict.containsKey(0) && dict.get(0)!=0){
+                nums[k]=0;
+                dict.put(0,dict.getOrDefault(0,0)-1);
+                k+=1;
+            }
+            else if(dict.containsKey(1) && dict.get(1)!=0){
+                nums[k]=1;
+                dict.put(1,dict.getOrDefault(1,0)-1);
+                k+=1;
+            }
+            else{
+                nums[k]=2;
+                dict.put(2,dict.getOrDefault(2,0)-1);
+                k+=1;
+            }
+        }
+        }
+    }
