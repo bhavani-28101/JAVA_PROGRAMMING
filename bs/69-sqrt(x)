@@ -1,0 +1,20 @@
+class Solution {
+    public int mySqrt(int x) {
+        return binarysearch(1,x,x);
+    }
+    public int binarysearch(int low,int high,int x ){
+        if(low>high){
+            return high;
+        }
+        int mid=(low+high)/2;
+        if(mid*mid==x){
+            return mid;
+        }
+        else if(mid>x/mid){
+            return binarysearch(low,mid-1,x);
+        }
+        else{
+            return binarysearch(mid+1,high,x);
+        }
+    }
+}
