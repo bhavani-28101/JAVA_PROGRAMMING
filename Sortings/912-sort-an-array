@@ -1,0 +1,51 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        merge(nums,0,nums.length-1);
+        return nums;
+    }
+    public static void merge(int nums[],int si,int ei){
+        if(si>=ei){
+            return;
+        }
+        int mid=si+(ei-si)/2;
+        merge(nums,si,mid);
+        merge(nums,mid+1,ei);
+        conquer(nums,si,mid,ei);
+    }
+    public static void conquer(int nums[],int si, int mid, int ei){
+        int merged[] = new int[ei-si+1];
+        int k=0;
+        int i=si;
+        int j=mid+1;
+        while(i<=mid && j<=ei){
+            if(nums[i]<=nums[j]){
+                merged[k]=nums[i];
+                k+=1;
+                i+=1;
+            }
+            else{
+                merged[k]=nums[j];
+                k+=1;
+                j+=1;
+            }
+            
+        }
+        while(i<=mid){
+            merged[k]=nums[i];
+            k+=1;
+            i+=1;
+        }
+        while(j<=ei){
+            merged[k]=nums[j];
+            k+=1;
+            j+=1;
+        }
+        int x=0;
+        for(int idx=si; idx<=ei;idx++){
+            nums[idx]=merged[x];
+            x+=1;
+        }
+    }
+    
+    
+}
