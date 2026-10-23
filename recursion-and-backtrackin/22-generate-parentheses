@@ -1,0 +1,33 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        String currstr="";
+        ArrayList<String>res=new ArrayList<>();
+        bt(n,currstr,res);
+        return res;
+    }
+    public void bt(int n,String currstr,ArrayList<String> res){
+        if((currstr.length()>n*2)){
+            return;
+        }
+        if(!currstr.isEmpty() && ((currstr.charAt(0)==')' && (currstr.length()==n*2)) || (currstr.charAt(currstr.length()-1)=='(' && (currstr.length()==n*2)))){
+            return;
+        }
+        int countopen=currstr.split("\\(",-1).length -1;
+        if(countopen > n){
+            return;
+        }
+        int countclose=currstr.split("\\)",-1).length -1;
+        if(countclose > n){
+            return;
+        }
+        if(countclose > countopen){
+            return;
+        }
+        if(currstr.length()==n*2){
+            res.add(currstr);
+            return;
+        }
+        bt(n,currstr+'(',res);
+        bt(n,currstr+')',res);
+    }
+}
