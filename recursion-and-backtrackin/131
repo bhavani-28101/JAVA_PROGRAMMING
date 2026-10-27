@@ -1,0 +1,43 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> curr = new ArrayList<>();
+
+        bt(s, 0, curr, res);
+        return res;
+    }
+
+    public void bt(String s, int start, List<String> curr,
+                   List<List<String>> res) {
+
+        if (start == s.length()) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+
+        for (int i = start; i < s.length(); i++) {
+            String sub = s.substring(start, i + 1);
+
+            if (isPalindrome(sub)) {
+                curr.add(sub);
+                bt(s, i + 1, curr, res);
+                curr.remove(curr.size() - 1);
+            }
+        }
+    }
+
+    public boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
